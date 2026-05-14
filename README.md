@@ -29,5 +29,9 @@ A pipelined Ethernet packet processor implemented in Systemverilog and using a N
 
 ## Planned features
 UART readback-stream buffered payload bytes to PC over USB-UART at 115200 baud. Will utilize my UART project but in SystemVerilog.
+
+
 UVM testbench rebuild - Fall 2026
+
+
 Payload Inspection - Winter 2026

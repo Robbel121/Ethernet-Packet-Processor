@@ -34,8 +34,10 @@ All modules include SystemVerilog smoke tests written without UVM. Tests use a s
 To run a simulation in Vivado:
 1. Add the module source and its corresponding tb_ file to your project
 2. Set the testbench as the top module under Simulation Sources
-3. Run Simulation → Run All
+3. Run Simulation -> Run All
 4. Check the Tcl console for PASS/FAIL output
+
+Here are some screenshots from Vivado ILA for verification:
 
 ## Planned features
 

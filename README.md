@@ -15,7 +15,7 @@ A pipelined Ethernet packet processor implemented in Systemverilog and using a N
 -Frame Length Validator: enforces a minimum(60 bytes from IEE 802.3) and maximum(1514 bytes/MTU) amount of bytes for data frame size.
 
 
--Packet FIFO: buffers paylaod bytes from frames that pass all tests. 
+-Packet FIFO: buffers payload bytes from frames that pass all tests. 
 
 
 -Status LED's: indicates real-time pass/drops/errors on onbaord LED's.
@@ -25,13 +25,19 @@ A pipelined Ethernet packet processor implemented in Systemverilog and using a N
 
 ## Architecture
 
+LAN 8720A PHY(RMII 2-bit rxd @ 50 MHz) -> RMII Deserializer(byte stream @ 50 Mhz) -> Frame Parser(dst mac, src mac, ethertype, payload bytes, then send parse done) -> MAC Address Filter(frame_pass or frame_drop) -> Frame length Validator(len_fail or len_pass) -> FIFO buffer(store for UART readback)
 
+## Simulation
+
+All modules include SystemVerilog smoke tests written without UVM. Tests use a self-checking scoreboard with $error reports.
+
+To run a simulation in Vivado:
+1. Add the module source and its corresponding tb_ file to your project
+2. Set the testbench as the top module under Simulation Sources
+3. Run Simulation → Run All
+4. Check the Tcl console for PASS/FAIL output
 
 ## Planned features
-UART readback: stream buffered payload bytes to PC over USB-UART at 115200 baud. Will utilize my UART project but in SystemVerilog.
 
+Fall/Winter 2026 - UVM testbench rebuild and UART readback: stream buffered payload bytes to PC over USB-UART at 115200 baud. Will utilize my UART project but in SystemVerilog.
 
-UVM testbench rebuild - Fall 2026
-
-
-Payload Inspection - Winter 2026

@@ -29,7 +29,7 @@ LAN 8720A PHY(RMII 2-bit rxd @ 50 MHz) -> RMII Deserializer(byte stream @ 50 Mhz
 
 ## Simulation
 
-All modules include SystemVerilog smoke tests written without UVM. Tests use a self-checking scoreboard with $error reports.
+All modules include SystemVerilog smoke tests written without UVM. Tests use a self-checking scoreboard with $error reports. Be sure to remove the (*mark debug*) commands in top.sv since those are meant for the ILA.
 
 To run a simulation in Vivado:
 1. Add the module source and its corresponding tb_ file to your project

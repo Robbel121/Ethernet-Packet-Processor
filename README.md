@@ -37,12 +37,7 @@ To run a simulation in Vivado:
 3. Run Simulation -> Run All
 4. Check the Tcl console for PASS/FAIL output
 
-Here are some screenshots from the test sources(not using UVM):
-
-
-Here are some screenshots from Vivado ILA for verification:
-
 ## Planned features
 
-Fall/Winter 2026 - UVM testbench rebuild
+Fall 2026 - UVM testbench rebuild
 

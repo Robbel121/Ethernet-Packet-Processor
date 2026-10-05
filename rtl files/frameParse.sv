@@ -22,15 +22,11 @@ module frameParse(
     
     state_s state, next_state; 
     
-    //Used to identify states
     logic [3:0] byte_count;
-    
-    //shift regs for MAC address
     logic [47:0] dst_mac_reg, src_mac_reg;
     logic [15:0] ether_type_reg;
     
     
-    //reset
     always_comb begin
        next_state = state;
        

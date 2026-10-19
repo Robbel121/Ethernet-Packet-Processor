@@ -18,7 +18,7 @@ module top(input logic clk_100M,
     //From clocking wizard, used for every module
     logic clk_50M;
     
-    //For RMII Deserializer
+    //For RMII Deserializer, (* mark_debug = "true" *) present for ILA implementation
     (* mark_debug = "true" *) logic [7:0] byte_out;
     (* mark_debug = "true" *) logic byte_valid;
     (* mark_debug = "true" *) logic frame_end;

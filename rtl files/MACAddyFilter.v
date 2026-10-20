@@ -85,17 +85,17 @@ module MACAddyFilter(
             
             case(state)
                 PASS: begin
-                    frame_pass = 1'b1;
-                    frame_drop = 1'b0;
+                    frame_pass <= 1'b1;
+                    frame_drop <= 1'b0;
                 end
                 
                 DROP: begin
-                    frame_pass = 1'b0;
-                    frame_drop = 1'b1;
+                    frame_pass <= 1'b0;
+                    frame_drop <= 1'b1;
                 end
                 default: begin
-                    frame_pass = 1'b0;
-                    frame_drop = 1'b0;
+                    frame_pass <= 1'b0;
+                    frame_drop <= 1'b0;
                 end
             endcase
         end

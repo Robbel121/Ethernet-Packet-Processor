@@ -34,7 +34,6 @@ module tb_top;
     initial phy_clk  = 1'b0;
     always  #10 phy_clk  = ~phy_clk;   
 
-    // Sticky capture registers
     logic cap_frame_pass, cap_frame_drop;
     logic cap_len_pass,   cap_len_fail;
     logic cap_frame_err;
@@ -55,7 +54,6 @@ module tb_top;
         end
     end
 
-    // Scoreboard counters
     int tests_run    = 0;
     int tests_passed = 0;
     int tests_failed = 0;
@@ -75,7 +73,6 @@ module tb_top;
         logic expect_err;
     } expected_t;
 
-    // Prediction function
     function automatic expected_t predict(
         input logic [47:0] dst,
         input logic        promisc,
@@ -114,7 +111,7 @@ module tb_top;
     endtask
 
     // Full Ethernet frame sender
-    // Builds: 7x preamble (0xAA) + SFD (0xD5) + dst + src + etype + payload
+    // 7x preamble (0xAA) + SFD (0xD5) + dst + src + etype + payload
     task automatic send_eth_frame(
         input logic [47:0] dst,
         input logic [47:0] src,
@@ -160,14 +157,12 @@ module tb_top;
         @(posedge phy_clk); #1;
     endtask
 
-    // Scoreboard
     task automatic check_result(
         input expected_t exp,
         input string     test_name
     );
         tests_run++;
 
-        // Error 
         if (exp.expect_err) begin
             if (cap_frame_err) begin
                 $display("[%s] PASS - frame_err asserted correctly", test_name);
@@ -180,7 +175,6 @@ module tb_top;
             return;
         end
 
-        // MAC filter
         if (exp.expect_pass && !cap_frame_pass) begin
             $error("[%s] FAIL - expected frame_pass, got pass=%b drop=%b",
                    test_name, cap_frame_pass, cap_frame_drop);
@@ -195,7 +189,6 @@ module tb_top;
             return;
         end
 
-        // Length check for frames that pass MAC filter
         if (exp.expect_pass) begin
             if (exp.expect_len_ok && !cap_len_pass) begin
                 $error("[%s] FAIL - expected len_pass, got pass=%b fail=%b",
@@ -215,7 +208,6 @@ module tb_top;
         tests_passed++;
     endtask
 
-    // Run one test
     // Resets pipeline, sends frame, waits, checks 
     task automatic run_test(
         input string       name,
@@ -238,7 +230,7 @@ module tb_top;
         send_eth_frame(dst, SRC_MAC, 16'h0800, payload_len,
                        corrupt_preamble, corrupt_sfd);
 
-        // payload * 4 dibit cycles + 200 cycles FSM latency margin
+        // payload * 4 dibit cycles + 200 cycles FSM latency 
         repeat((payload_len * 4) + 200) @(posedge phy_clk);
 
         check_result(exp, name);
